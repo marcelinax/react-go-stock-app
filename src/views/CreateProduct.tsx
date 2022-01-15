@@ -8,6 +8,7 @@ import { MESSAGES } from './../messages/messages';
 import { MeasureType } from '../enums/MeasureType';
 import { MeasureTypesSelect } from '../components/inputs/MeasureTypesSelect';
 import { PrimaryButton } from '../components/global/PrimaryButton';
+import { ProductForm } from './../components/ProductForm';
 import { Select } from '../components/inputs/Select';
 import { TaxesSelect } from './../components/inputs/TaxesSelect';
 import { apiClient } from './../api/apiClient';
@@ -86,23 +87,16 @@ export const CreateProduct: React.FC = () => {
     };
 
     const filterErrors = (value: string): string => {
-        return errors.filter(err => {return err===value;})[0];
+        return errors.filter(err => {return err === value;})[0];
     };
 
     return (
         <>
             <DefaultLayout>
-                <Form onSubmit={onFormSubmit}>
-                    <div className='row'>
-                        <Input id='name' title='Nazwa' value={formDate.name} onChange={onInputChange} error={filterErrors(MESSAGES.ENTER_PRODUCT_NAME)}/>
-                        <MeasureTypesSelect value={formDate.measure_type} onChange={onSelectChange} error={filterErrors(MESSAGES.CHOOSE_MEASURE_TYPE)}/>
-                        <CategoriesSelect onChange={onSelectChange} value={formDate.category_id} error={filterErrors(MESSAGES.CHOOSE_CATEGORY)}/>
-                        <TaxesSelect onChange={onSelectChange} value={formDate.tax_id}error={filterErrors(MESSAGES.CHOOSE_TAX)} />
-                    </div>
-                    <div className='row'>
-                        <PrimaryButton type='submit' title='Create' />
-                    </div>
-                </Form>
+                <ProductForm buttonTitle='Stwórz' category={formDate.category_id} tax={formDate.tax_id} measure_type={formDate.measure_type} name={formDate.name} onFormSubmit={onFormSubmit}
+                    categoryError={filterErrors(MESSAGES.CHOOSE_CATEGORY)} measure_typeError={filterErrors(MESSAGES.CHOOSE_MEASURE_TYPE)} nameError={filterErrors(MESSAGES.ENTER_PRODUCT_NAME)}
+                    taxError={filterErrors(MESSAGES.CHOOSE_TAX)} onInputChange={onInputChange} onSelectChange={onSelectChange} 
+                />
             </DefaultLayout>
         </>
     );
