@@ -1,29 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { CategoriesSelect } from '../components/inputs/CategoriesSelect';
 import { DefaultLayout } from './../layouts/DefaultLayout';
-import { Form } from '../components/global/Form';
-import { Input } from '../components/inputs/Input';
 import { MESSAGES } from './../messages/messages';
 import { MeasureType } from '../enums/MeasureType';
-import { MeasureTypesSelect } from '../components/inputs/MeasureTypesSelect';
-import { PrimaryButton } from '../components/global/PrimaryButton';
+import { Product } from './../models/Product';
 import { ProductForm } from './../components/ProductForm';
-import { Select } from '../components/inputs/Select';
-import { TaxesSelect } from './../components/inputs/TaxesSelect';
 import { apiClient } from './../api/apiClient';
-import { useNavigate } from 'react-router-dom';
 
-export const CreateProduct: React.FC = () => {
-    
+export const EditProduct: React.FC = () => {
+
     const [formDate, setFormDate] = useState<{name: string, measure_type: number, category_id: number,tax_id: number}>({
         name: '',
         measure_type: -1,
         category_id: 0,
         tax_id: 0
     });
-    const [errors, setErrors] = useState<string[]>([]);
+
+    const params = useParams();
     const navigate = useNavigate();
+    const [errors, setErrors] = useState<string[]>([]);
+    const [product, setProduct] = useState<Product | null>(null);
+
+
+    useEffect(() => {
+        fetchProductById();
+    }, []);
+
+    const convertMesaureTypeToEnum = (measure_type: string) => {
+        switch (measure_type) {
+        case 'sztuka':
+            return MeasureType.SZTUKA;
+        }
+        return 0;
+    };
+
+    useEffect(() => {
+        if(product)
+            setFormDate({
+                name: product.name,
+                measure_type: convertMesaureTypeToEnum(product.measure_type),
+                category_id: product.category.id,
+                tax_id: product.tax.id
+            });
+    }, [product]);
 
     const onInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const { id, value } = e.target;
@@ -39,6 +59,11 @@ export const CreateProduct: React.FC = () => {
             ...formDate,
             [id]: value
         });
+        console.log(e.target);
+    };
+
+    const fetchProductById = async (): Promise<void> => {
+        await apiClient.get(`products/${params.id}?include=category,tax`).then(res => setProduct(res.data.data));
     };
 
     const checkValidation = (): boolean => {
@@ -65,9 +90,9 @@ export const CreateProduct: React.FC = () => {
         return isValid;
     };
 
-    const createProduct = async (): Promise<void> => {
+    const editProduct = async (): Promise<void> => {
         if (checkValidation()) {
-            await apiClient.post('products', {
+            await apiClient.put(`products/${params.id}`, {
                 ...formDate,
                 category_id: +formDate.category_id,
                 tax_id: +formDate.tax_id,
@@ -76,16 +101,11 @@ export const CreateProduct: React.FC = () => {
             setErrors([]);
             navigate('/');
         }
-        // if (error.response) {
-        //     setErrors([...errors, error.response.data]);
-        // } else {
-        //     setErrors([...errors, MESSAGES.FORM_SUBMISSION_ERROR]);
-        // }
     };
 
     const onFormSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        createProduct();
+        editProduct();
     };
 
     const filterErrors = (value: string): string => {
@@ -95,7 +115,7 @@ export const CreateProduct: React.FC = () => {
     return (
         <>
             <DefaultLayout>
-                <ProductForm buttonTitle='Stwórz' category={formDate.category_id} tax={formDate.tax_id} measure_type={formDate.measure_type} name={formDate.name} onFormSubmit={onFormSubmit}
+                <ProductForm buttonTitle='Edytuj' category={formDate.category_id} tax={formDate.tax_id} measure_type={formDate.measure_type} name={formDate.name} onFormSubmit={onFormSubmit}
                     categoryError={filterErrors(MESSAGES.CHOOSE_CATEGORY)} measure_typeError={filterErrors(MESSAGES.CHOOSE_MEASURE_TYPE)} nameError={filterErrors(MESSAGES.ENTER_PRODUCT_NAME)}
                     taxError={filterErrors(MESSAGES.CHOOSE_TAX)} onInputChange={onInputChange} onSelectChange={onSelectChange} 
                 />

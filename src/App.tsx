@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Categories } from './views/Categories';
 import { CreateCategory } from './views/CreateCategory';
 import { CreateProduct } from './views/CreateProduct';
+import { EditProduct } from './views/EditProduct';
 import { Products } from './views/Products';
 import { Provider } from 'react-redux';
 import React from 'react';
@@ -17,6 +18,7 @@ function App() {
                     <Route path='/new-product' element={<CreateProduct/>} />
                     <Route path='/new-category' element={<CreateCategory/>} />
                     <Route path='/categories' element={<Categories/>} />
+                    <Route path='/edit-product/:id' element={<EditProduct/>} />
                 </Routes>
             </BrowserRouter>
         </Provider>

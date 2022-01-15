@@ -12,7 +12,7 @@ export const MeasureTypesSelect: React.FC<Props> = ({ onChange, value,error }) =
     
     const renderMeasureTypesSelectOptions = (): JSX.Element | JSX.Element[] => {
         
-        return Object.values(MeasureType).map((type,index) => {
+        return Object.values(MeasureType).filter(v => typeof v === 'string').map((type,index) => {
             return (
                 <option key={type} value={index}>{type}</option>
             );});
