@@ -29,7 +29,6 @@
         "react/prop-types": [0],
         "indent": ["error", 4], 
         "react/prefer-stateless-function": ["off"],
-        "arrow-body-style": ["error", "always"],
         "no-multi-spaces": ["error"],
         "react/self-closing-comp": ["error", {
             "component": true,
@@ -37,6 +36,7 @@
         }],
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
-       "no-unused-vars": ["off"]
+       "no-unused-vars": ["off"],
+       "arrow-body-style": "off"
     }
 }
