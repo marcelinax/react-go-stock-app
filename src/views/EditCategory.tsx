@@ -41,7 +41,7 @@ export const EditCategory: React.FC = () => {
     };
 
     const checkValidation = (): boolean => {
-        if (!category) {
+        if (!categoryName) {
             setErrors([...errors, MESSAGES.ENTER_CATEGORY_NAME]);
             return false;
         }
