@@ -7,9 +7,10 @@ import { apiClient } from './../../api/apiClient';
 interface Props {
     value: number,
     onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    error: string;
 }
 
-export const TaxesSelect: React.FC<Props> = ({value,onChange}) => {
+export const TaxesSelect: React.FC<Props> = ({value,onChange, error}) => {
 
     const [taxes, setTaxes] = useState<Tax[]>([]);
     
@@ -29,7 +30,7 @@ export const TaxesSelect: React.FC<Props> = ({value,onChange}) => {
     };
 
     return taxes && (
-        <Select id='tax_id' title='Podatek' value={value} onChange={onChange} >
+        <Select id='tax_id' title='Podatek' value={value} onChange={onChange} error={error}>
             <option value="0" className='d-none' disabled />
             {renderTaxesSelectOptions()}
         </Select>

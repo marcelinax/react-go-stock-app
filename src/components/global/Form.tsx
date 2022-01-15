@@ -3,7 +3,7 @@ import React from 'react';
 interface Props {
     className?: string,
     children: React.ReactNode,
-    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+    onSubmit: (e: React.SyntheticEvent<HTMLFormElement>) => void;
 }
 
 export const Form: React.FC<Props> = ({className, children,onSubmit}) => {

@@ -7,9 +7,10 @@ import { apiClient } from '../../api/apiClient';
 interface Props {
     value: number,
     onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    error: string;
 }
 
-export const CategoriesSelect: React.FC<Props> = ({ value, onChange }) => {
+export const CategoriesSelect: React.FC<Props> = ({ value, onChange, error }) => {
 
     const [categories, setCategories] = useState<Category[]>([]);
     
@@ -29,7 +30,7 @@ export const CategoriesSelect: React.FC<Props> = ({ value, onChange }) => {
     };
 
     return categories && (
-        <Select id='category_id' title='Kategoria' value={value} onChange={onChange} >
+        <Select id='category_id' title='Kategoria' value={value} onChange={onChange} error={error}>
             <option value="0" className='d-none' disabled />
             {renderCategoriesSelectOptions()}
         </Select>
