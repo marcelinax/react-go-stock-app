@@ -1,6 +1,6 @@
 export enum MeasureType {
     SZTUKA = 'sztuka',
     KILOGRAM = 'kilogram', 
-    LIR = 'litr',
+    LITR = 'litr',
     OPAKOWANIE = 'opakowanie'
 }
