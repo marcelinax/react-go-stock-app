@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 
+import { CategoryForm } from './../components/CategoryForm';
 import { DefaultLayout } from './../layouts/DefaultLayout';
-import { Form } from '../components/global/Form';
-import { Input } from '../components/inputs/Input';
 import { MESSAGES } from './../messages/messages';
-import { PrimaryButton } from '../components/global/PrimaryButton';
 import { apiClient } from './../api/apiClient';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateCategory: React.FC = () => {
 
     const [category, setCategory] = useState<string>('');
     const [errors, setErrors] = useState<string[]>([]);
-
+    const navigate = useNavigate();
 
     const checkValidation = (): boolean => {
         if (!category) {
@@ -33,6 +32,8 @@ export const CreateCategory: React.FC = () => {
             await apiClient.post('product_categories/' , {
                 name: category
             });
+            setErrors([]);
+            navigate('/categories');
         }
     };
 
@@ -43,14 +44,7 @@ export const CreateCategory: React.FC = () => {
 
     return (
         <DefaultLayout>
-            <Form onSubmit={onFormSubmit}> 
-                <div className='row'>
-                    <Input id='name' onChange={onInputChange} value={category} title='Nazwa kategorii' error={errors.filter(err => {return MESSAGES.ENTER_CATEGORY_NAME === err;})[0]}/>
-                </div>
-                <div className='row'>
-                    <PrimaryButton title='Stwórz' type='submit'/>
-                </div>
-            </Form>
+            <CategoryForm buttonTitle='Stwórz' onFormSubmit={onFormSubmit} category={category} onInputChange={onInputChange} error={errors.filter(err => { return MESSAGES.ENTER_CATEGORY_NAME === err; })[0]}/>
         </DefaultLayout>
     );
 };
