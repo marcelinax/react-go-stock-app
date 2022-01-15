@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import { CreateProduct } from './views/CreateProduct';
 import { Products } from './views/Products';
 import { Provider } from 'react-redux';
 import React from 'react';
@@ -11,6 +12,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<Products/>} />
+                    <Route path='/new-product' element={<CreateProduct/>} />
                 </Routes>
             </BrowserRouter>
         </Provider>
