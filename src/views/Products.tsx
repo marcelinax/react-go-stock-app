@@ -30,7 +30,7 @@ export const Products: React.FC = () => {
         (i: Product) => i.category.name,
         (i: Product) => i.measure_type,
         (i: Product) => i.tax.name + ' ' + i.tax.code,
-        (i: Product) => <PrimaryButton title='Edytuj' type='button' onClick={()=>{naviagtion(`edit-product/${i.id}`);}}/>,
+        (i: Product) => <PrimaryButton title='Edytuj' type='button' className='btn-primary' onClick={()=>{naviagtion(`/edit-product/${i.id}`);}}/>,
     ];
 
     useEffect(() => {
@@ -39,7 +39,7 @@ export const Products: React.FC = () => {
 
     useEffect(() => {
         fetchProducts();
-    }, [search, page]);
+    }, [search, page, size]);
 
 
     
@@ -55,18 +55,34 @@ export const Products: React.FC = () => {
         setSearch(e.target.value);
     };
 
-    const onPageChange = (event: React.MouseEvent<HTMLButtonElement> | null,
+    const onPageChange = (e: React.MouseEvent<HTMLButtonElement> | null,
         newPage: number ): void => {
         setPage(newPage);
     };
 
+    const onRowsPerPageChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setSize(+e.target.value);
+        setPage(0);
+    };
+
     return (
-        <>
-            <DefaultLayout>
-                <Search onChange={onInputChange} value={search} placeholder='Szukaj...' />
-                <TablePagination page={page} count={productsAmount} rowsPerPage={size} onPageChange={onPageChange} onRowsPerPageChange={()=>{}}/>
-                <Table items={products} tableHeadings={tableHeadings} tableItemsKeys={tableItemsKeys} />
-            </DefaultLayout>
-        </>
+        <DefaultLayout>
+            <div className='row mt-5'>
+                <div className='col-12 mb-2'>
+                    <h3 className='mb-5'>Lista produktów</h3>
+                    <div className='row'>
+                        <div className='col-4'>
+                            <Search onChange={onInputChange} value={search} placeholder='Szukaj...' />
+                        </div>
+                        <div className='col-8'>
+                            <TablePagination page={page} count={productsAmount} rowsPerPage={size} onPageChange={onPageChange} onRowsPerPageChange={onRowsPerPageChange}/>
+                        </div>
+                    </div>
+                </div>
+                <div className='col-12'>
+                    <Table items={products} tableHeadings={tableHeadings} tableItemsKeys={tableItemsKeys} />
+                </div>
+            </div>
+        </DefaultLayout>
     );
 };

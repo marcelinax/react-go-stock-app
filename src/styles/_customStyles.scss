@@ -1,13 +1,22 @@
 $theme-colors: (
-  "blue": #5c61ed,
-  "red": #dc2626,
-  "green": #70c0af,
+  "info": #5c61ed,
+  "danger": #dc2626,
+  "success": #70c0af,
   "gray": #aaaaaf,
-  "light-gray": #EDEDED
+  "gray-100": #EDEDED,
+  "gray-200": #E7E7E7,
+  "primary": #404C59
 );
 
+$primary: #404C59;
+$gray: #aaaaaf;
 
-
+$position-values: (
+  0: 0,
+  50: 50%,
+  75: 75%,
+  100: 100%
+);
 
 
 .cursor-pointer{
@@ -21,3 +30,17 @@ $theme-colors: (
 .fs-6{
   font-size: 14px;
 }
+
+.fs-7{
+  font-size: 12px;
+}
+
+.fs-8{
+  font-size: 10px;
+}
+
+
+.w-fit {
+ width: fit-content;
+}
+

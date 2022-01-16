@@ -8,8 +8,8 @@ interface Props {
     
 }
 
-export const PrimaryButton: React.FC<Props> = ({title,type,className,onClick}) => {
+export const PrimaryButton: React.FC<Props> = ({title, type, className, onClick}) => {
     return (
-        <button type={type} onClick={onClick} className={`${className}`}>{title}</button>
+        <button type={type} onClick={onClick} className={`btn border-0 text-white ${className}`}>{title}</button>
     );
 };

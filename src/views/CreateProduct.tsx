@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 
-import { CategoriesSelect } from '../components/inputs/CategoriesSelect';
 import { DefaultLayout } from './../layouts/DefaultLayout';
-import { Form } from '../components/global/Form';
-import { Input } from '../components/inputs/Input';
 import { MESSAGES } from './../messages/messages';
-import { MeasureType } from '../enums/MeasureType';
-import { MeasureTypesSelect } from '../components/inputs/MeasureTypesSelect';
-import { PrimaryButton } from '../components/global/PrimaryButton';
 import { ProductForm } from './../components/ProductForm';
-import { Select } from '../components/inputs/Select';
-import { TaxesSelect } from './../components/inputs/TaxesSelect';
 import { apiClient } from './../api/apiClient';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 export const CreateProduct: React.FC = () => {
@@ -74,18 +67,14 @@ export const CreateProduct: React.FC = () => {
                 type: 'BASIC'
             });
             setErrors([]);
-            navigate('/');
+            navigate('/products');
         }
-        // if (error.response) {
-        //     setErrors([...errors, error.response.data]);
-        // } else {
-        //     setErrors([...errors, MESSAGES.FORM_SUBMISSION_ERROR]);
-        // }
     };
 
     const onFormSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
         e.preventDefault();
         createProduct();
+        toast.success('Produkt dodany pomyślnie');
     };
 
     const filterErrors = (value: string): string => {
@@ -93,13 +82,11 @@ export const CreateProduct: React.FC = () => {
     };
 
     return (
-        <>
-            <DefaultLayout>
-                <ProductForm buttonTitle='Stwórz' category={formDate.category_id} tax={formDate.tax_id} measure_type={formDate.measure_type} name={formDate.name} onFormSubmit={onFormSubmit}
-                    categoryError={filterErrors(MESSAGES.CHOOSE_CATEGORY)} measure_typeError={filterErrors(MESSAGES.CHOOSE_MEASURE_TYPE)} nameError={filterErrors(MESSAGES.ENTER_PRODUCT_NAME)}
-                    taxError={filterErrors(MESSAGES.CHOOSE_TAX)} onInputChange={onInputChange} onSelectChange={onSelectChange} 
-                />
-            </DefaultLayout>
-        </>
+        <DefaultLayout>
+            <ProductForm heading='Dodaj produkt' category={formDate.category_id} tax={formDate.tax_id} measure_type={formDate.measure_type} name={formDate.name} onFormSubmit={onFormSubmit}
+                categoryError={filterErrors(MESSAGES.CHOOSE_CATEGORY)} measure_typeError={filterErrors(MESSAGES.CHOOSE_MEASURE_TYPE)} nameError={filterErrors(MESSAGES.ENTER_PRODUCT_NAME)}
+                taxError={filterErrors(MESSAGES.CHOOSE_TAX)} onInputChange={onInputChange} onSelectChange={onSelectChange} 
+            />
+        </DefaultLayout>
     );
 };

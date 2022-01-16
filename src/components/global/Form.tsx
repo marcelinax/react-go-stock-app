@@ -8,7 +8,7 @@ interface Props {
 
 export const Form: React.FC<Props> = ({className, children,onSubmit}) => {
     return (
-        <div className='bg-light-gray border-1-gray'>
+        <div className='bg-gray-100 border border-2 rounded-2 overflow-hidden border-gray-2 my-5'>
             <form onSubmit={onSubmit}>
                 {children}
             </form>

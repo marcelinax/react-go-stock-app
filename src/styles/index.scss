@@ -11,19 +11,53 @@
     
 }
 
+.form-control:focus {
+  border: solid 2px $gray-200;
+  box-shadow: none; 
+}
+
+.form-control, select {
+  border: solid 2px $gray-200;
+}
+
+button{
+  outline: none;
+  transition: .2s all !important;
+  
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+.btn {
+  &:hover {
+    transform: scale(95%) !important;
+    transition: .2s all !important;
+  }
+}
+
+select {
+  outline: none;
+  padding: 6px;
+}
+
+
+label {
+  padding: 0 !important;
+}
+
 .sidebar{
     width: 200px;
     &-link{
       &:hover{
         svg {
-          fill: #70c0af;
+          fill: $gray;
           transition: .2s all;
         }
-        p{
-          color: #70c0af !important;
+        span{
+          color:$gray !important;
           transition: .2s all;
         }
-     
        
       }
       &--active{
@@ -31,13 +65,37 @@
           content: '';
           height: 100%;
           width: 3px;
-          background-color: #70c0af;
+          background-color: white;
           position: absolute;
           top: 0;
-          right: -.6rem;
+          left: -.4rem;
           border-radius: 2px;
         }
       }
     }
     
+}
+
+.content {
+  margin-left: 200px;
+}
+
+.homepage-content {
+  height: calc(100% - 10rem);
+}
+
+.table {
+  thead {
+    background-color: $primary;
+    border: 1px solid $primary;
+    color: $light;
+  }
+  
+  tbody {
+    border-top: 0 !important;
+    color: $gray;
+    td {
+      vertical-align: middle;
+    }
+  }
 }

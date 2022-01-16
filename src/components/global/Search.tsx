@@ -9,9 +9,11 @@ interface Props{
 
 export const Search: React.FC<Props> = ({placeholder, value, onChange}) => {
     return (
-        <div>
-            <input type='text' placeholder={placeholder} value={value} onChange={onChange} />
-            <BiSearchAlt2/>
+        <div className='row align-items-center'>
+            <div className='col  position-relative'>
+                <input type='text' placeholder={placeholder} value={value} onChange={onChange} className='form-control text-gray pe-5'/>
+                <BiSearchAlt2 fill='gray' className='position-absolute top-50 end-0 translate-middle me-3' />
+            </div>
         </div>
     );
 };

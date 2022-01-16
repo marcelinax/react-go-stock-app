@@ -14,7 +14,7 @@ export const MeasureTypesSelect: React.FC<Props> = ({ onChange, value,error }) =
         
         return Object.values(MeasureType).filter(v => typeof v === 'string').map((type,index) => {
             return (
-                <option key={type} value={index}>{type}</option>
+                <option key={type} value={index}>{type.toString().toLowerCase()}</option>
             );});
     };
     

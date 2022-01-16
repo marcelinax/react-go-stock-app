@@ -5,6 +5,7 @@ import { MeasureTypesSelect } from './inputs/MeasureTypesSelect';
 import { PrimaryButton } from './global/PrimaryButton';
 import React from 'react';
 import { TaxesSelect } from './inputs/TaxesSelect';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
     onFormSubmit: (e: React.SyntheticEvent<HTMLFormElement>) => void;
@@ -18,7 +19,7 @@ interface Props {
     taxError: string;
     categoryError: string;
     nameError: string;
-    buttonTitle: string;
+    heading: string;
 }
 
 export const ProductForm: React.FC<Props> = ({
@@ -33,18 +34,27 @@ export const ProductForm: React.FC<Props> = ({
     categoryError,
     nameError,
     taxError,
-    buttonTitle
+    heading
 }) => {
+
+    const navigate = useNavigate();
+
     return (
         <Form onSubmit={onFormSubmit}>
-            <div className='row'>
-                <Input id='name' title='Nazwa' value={name} onChange={onInputChange} error={nameError}/>
-                <MeasureTypesSelect value={measure_type} onChange={onSelectChange} error={measure_typeError}/>
-                <CategoriesSelect onChange={onSelectChange} value={category} error={categoryError}/>
-                <TaxesSelect onChange={onSelectChange} value={tax} error={taxError} />
-            </div>
-            <div className='row'>
-                <PrimaryButton type='submit' title={buttonTitle} />
+            <div className='col flex p-5'>
+                <h1 className='fs-2 mb-4'>{heading}</h1>
+                <div className='row'>
+                    <Input id='name' title='Nazwa' value={name} onChange={onInputChange} error={nameError}/>
+                </div>
+                <div className='row mt-4'>
+                    <MeasureTypesSelect value={measure_type} onChange={onSelectChange} error={measure_typeError} />
+                    <CategoriesSelect onChange={onSelectChange} value={category} error={categoryError} />
+                    <TaxesSelect onChange={onSelectChange} value={tax} error={taxError} />
+                </div>
+                <div className='col mt-5'>
+                    <PrimaryButton type='submit' title='Zapisz' className='bg-primary me-2'/>
+                    <PrimaryButton type='button' title='Anuluj' className='bg-danger' onClick={()=>{navigate('/products');}}/>
+                </div>
             </div>
         </Form>
     );

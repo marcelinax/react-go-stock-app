@@ -7,6 +7,7 @@ import { MeasureType } from '../enums/MeasureType';
 import { Product } from './../models/Product';
 import { ProductForm } from './../components/ProductForm';
 import { apiClient } from './../api/apiClient';
+import { toast } from 'react-toastify';
 
 export const EditProduct: React.FC = () => {
 
@@ -106,6 +107,7 @@ export const EditProduct: React.FC = () => {
     const onFormSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
         e.preventDefault();
         editProduct();
+        toast.success('Produkt zedytowany pomyślnie');
     };
 
     const filterErrors = (value: string): string => {
@@ -115,7 +117,7 @@ export const EditProduct: React.FC = () => {
     return (
         <>
             <DefaultLayout>
-                <ProductForm buttonTitle='Edytuj' category={formDate.category_id} tax={formDate.tax_id} measure_type={formDate.measure_type} name={formDate.name} onFormSubmit={onFormSubmit}
+                <ProductForm heading='Edytuj produkt' category={formDate.category_id} tax={formDate.tax_id} measure_type={formDate.measure_type} name={formDate.name} onFormSubmit={onFormSubmit}
                     categoryError={filterErrors(MESSAGES.CHOOSE_CATEGORY)} measure_typeError={filterErrors(MESSAGES.CHOOSE_MEASURE_TYPE)} nameError={filterErrors(MESSAGES.ENTER_PRODUCT_NAME)}
                     taxError={filterErrors(MESSAGES.CHOOSE_TAX)} onInputChange={onInputChange} onSelectChange={onSelectChange} 
                 />

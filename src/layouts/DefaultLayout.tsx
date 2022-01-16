@@ -6,10 +6,12 @@ interface Props {
 }
 export const DefaultLayout: React.FC<Props> = ({children}) => {
     return (
-        <div className='vh-100 vw-100 d-flex'>
+        <div className='h-100 w-100 d-flex'>
             <Sidebar />
-            <div className='container h-full mx-auto'>
-                {children}
+            <div className='h-full w-100 content'>
+                <div className='container mx-auto h-100'>
+                    {children}
+                </div>
             </div>
         </div>
     );

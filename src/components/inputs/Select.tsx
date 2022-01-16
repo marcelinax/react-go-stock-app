@@ -11,12 +11,12 @@ interface Props {
 
 export const Select: React.FC<Props> = ({children, title, value, onChange, id, error}) => {
     return (
-        <div>
-            <label>{title}</label>
-            <select id={id} value={value} onChange={onChange}>
+        <div className='col'>
+            <label className='fs-7 text-gray fw-500'>{title}</label>
+            <select id={id} value={value} onChange={onChange} className='w-100 text-gray rounded-2'>
                 {children}
             </select>
-            {error && <span>{error}</span>}
+            {error && <span className='fs-7 text-danger fw-500'>{error}</span>}
         </div>
     );
 };

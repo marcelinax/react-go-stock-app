@@ -6,6 +6,7 @@ import { CategoryForm } from '../components/CategoryForm';
 import { DefaultLayout } from './../layouts/DefaultLayout';
 import { MESSAGES } from './../messages/messages';
 import { apiClient } from './../api/apiClient';
+import { toast } from 'react-toastify';
 
 export const EditCategory: React.FC = () => {
 
@@ -59,11 +60,12 @@ export const EditCategory: React.FC = () => {
     const onFormSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
         e.preventDefault();
         editCategory();
+        toast.success('Kategoria zedytowana pomyślnie');
     };
 
     return (
         <DefaultLayout>
-            <CategoryForm buttonTitle='Edytuj' category={categoryName} onInputChange={onInputChange} 
+            <CategoryForm heading='Edytuj kategorię' category={categoryName} onInputChange={onInputChange} 
                 error={errors.filter(err => { return MESSAGES.ENTER_CATEGORY_NAME === err; })[0]} onFormSubmit={onFormSubmit} />
         </DefaultLayout>
     );

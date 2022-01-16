@@ -5,9 +5,9 @@ interface Props {
     page: number;
     count: number;
     rowsPerPage: number;
-    onPageChange: (event: React.MouseEvent<HTMLButtonElement> | null,
+    onPageChange: (e: React.MouseEvent<HTMLButtonElement> | null,
         newPage: number) => void;
-    onRowsPerPageChange: () => void;
+    onRowsPerPageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const TablePagination: React.FC<Props> = ({
@@ -21,6 +21,23 @@ export const TablePagination: React.FC<Props> = ({
             onPageChange={onPageChange}
             rowsPerPage={rowsPerPage}
             onRowsPerPageChange={onRowsPerPageChange}
+            rowsPerPageOptions={[10, 15, 20, 25]}
+            labelRowsPerPage='Maks na stronie'
+            sx={{
+                '& .MuiTablePagination-select': {
+                    border: '1px solid #aaaaaf',
+                    borderRadius: '3px',
+                    color: '#aaaaaf'
+                },
+                '& .MuiTablePagination-selectLabel': {
+                    color: '#aaaaaf',
+                    marginBottom: '0'
+                },
+                '& 	.MuiTablePagination-displayedRows': {
+                    marginBottom: '0',
+                    color: '#aaaaaf'
+                }
+            }}
         />
     );
 };

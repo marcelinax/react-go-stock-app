@@ -26,7 +26,7 @@ export const Categories: React.FC = () => {
     const tableItemsKeys = [
         (i: Category) => i.id,
         (i: Category) => i.name,
-        (i: Category) => <PrimaryButton title='Edytuj' type='button' onClick={() => {
+        (i: Category) => <PrimaryButton title='Edytuj' type='button' className='btn-primary' onClick={() => {
             naviagtion(`/edit-category/${i.id}`);
         }}/>
 
@@ -38,7 +38,7 @@ export const Categories: React.FC = () => {
     
     useEffect(() => {
         fetchCategories();
-    }, [search, page]);
+    }, [search, page, size]);
     
     const fetchCategories = async (): Promise<void> => {
         await apiClient.get(`product_categories?search=${search}&page=${page}&size=${size}`).then(res => setCategories(res.data.data));
@@ -57,11 +57,29 @@ export const Categories: React.FC = () => {
         setPage(newPage);
     };
 
+    const onRowsPerPageChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setSize(+e.target.value);
+        setPage(0);
+    };
+
     return (
         <DefaultLayout>
-            <Search onChange={onInputChange} value={search} placeholder='Szukaj...'/>
-            <TablePagination page={page} count={categoriesAmount} rowsPerPage={size} onPageChange={onPageChange} onRowsPerPageChange={()=>{}}/>
-            <Table items={categories} tableHeadings={tableHeadings} tableItemsKeys={tableItemsKeys} />
+            <div className='row mt-5'>
+                <div className='col-12 mb-2'>
+                    <h3 className='mb-5'>Lista kategorii</h3>
+                    <div className='row'>
+                        <div className='col-4'>
+                            <Search onChange={onInputChange} value={search} placeholder='Szukaj...' />
+                        </div>
+                        <div className='col-8'>
+                            <TablePagination page={page} count={categoriesAmount} rowsPerPage={size} onPageChange={onPageChange} onRowsPerPageChange={onRowsPerPageChange}/>
+                        </div>
+                    </div>
+                </div>
+                <div className='col-12'>
+                    <Table items={categories} tableHeadings={tableHeadings} tableItemsKeys={tableItemsKeys} />
+                </div>
+            </div>
         </DefaultLayout>
     );
 };

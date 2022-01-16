@@ -23,17 +23,15 @@ export const Table: React.FC<Props> = ({ tableHeadings, tableItemsKeys, items })
     const renderTableItems = (): JSX.Element | JSX.Element[] => {
         return items && items.map((item,index) => {return (
             <tr key={index}>
-                <th scope="row">{index + 1}</th>
                 {renderTableRowDate(item)}
             </tr>
         );});
     };
 
     return (
-        <table className="table">
+        <table className="table border overflow-hidden">
             <thead>
-                <tr>
-                    <th scope="col">#</th>
+                <tr> 
                     {renderTableHeadings()}
                 </tr>
             </thead>
