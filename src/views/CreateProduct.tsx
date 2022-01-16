@@ -69,13 +69,13 @@ export const CreateProduct: React.FC = () => {
             });
             setErrors([]);
             navigate('/products');
+            toast.success(locales.product_added_successfully);
         }
     };
 
     const onFormSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
         e.preventDefault();
         createProduct();
-        toast.success(locales.product_added_successfully);
     };
 
     const filterErrors = (value: string): string => {

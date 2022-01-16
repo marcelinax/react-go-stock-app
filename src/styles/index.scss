@@ -11,6 +11,28 @@
     
 }
 
+@keyframes sidebarShow {
+  0% {
+    left: -100%;
+  
+  }
+  100% {
+    left: 0;
+ 
+  }
+}
+
+@keyframes sidebarHide {
+  0% {
+    left: 0;
+  
+  }
+  100% {
+    left: -100%;
+ 
+  }
+}
+
 .form-control:focus {
   border: solid 2px $gray-200;
   box-shadow: none; 
@@ -48,7 +70,38 @@ label {
 
 .sidebar{
     width: 200px;
+
+   
+ 
+    @media (max-width: 768px) {
+      width: 100%;
+      left: -100%;
+
+      .logo {
+        font-size: 1px !important;
+        transition: .5s all;
+      }
+      
+     &.sidebar-mobile-open {
+        left: 0;
+        z-index: 3;
+        animation: .5s sidebarShow;
+
+        .logo {
+          font-size: 1.53rem !important;
+        }
+
+        &.sidebar-mobile-hide {
+          animation: .5s sidebarHide !important;
+          .logo {
+            font-size: 1px !important;
+          }
+        }
+     }
+    }
+
     &-link{
+      white-space: nowrap;
       &:hover{
         svg {
           fill: $gray;
@@ -70,14 +123,30 @@ label {
           top: 0;
           left: -.4rem;
           border-radius: 2px;
+          @media (max-width: 768px) {
+            content: none;
+          }
+        }
+        @media (max-width: 768px) {
+          width: 100%;
+          background-color: $gray;
+          left: 0;
         }
       }
     }
     
 }
 
+.logo {
+  white-space: nowrap;
+}
+
 .content {
   margin-left: 200px;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
 }
 
 .homepage-content {

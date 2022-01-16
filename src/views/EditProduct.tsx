@@ -108,13 +108,13 @@ export const EditProduct: React.FC = () => {
             });
             setErrors([]);
             navigate('/');
+            toast.success(locales.product_edited_successfully);
         }
     };
 
     const onFormSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
         e.preventDefault();
         editProduct();
-        toast.success(locales.product_edited_successfully);
     };
 
     const filterErrors = (value: string): string => {

@@ -47,10 +47,16 @@ export const ProductForm: React.FC<Props> = ({
                 <div className='row'>
                     <Input id='name' title={locales.name} value={name} onChange={onInputChange} error={nameError}/>
                 </div>
-                <div className='row mt-4'>
-                    <MeasureTypesSelect value={measure_type} onChange={onSelectChange} error={measure_typeError} />
-                    <CategoriesSelect onChange={onSelectChange} value={category} error={categoryError} />
-                    <TaxesSelect onChange={onSelectChange} value={tax} error={taxError} />
+                <div className='row mt-md-4'>
+                    <div className='col-12 col-md-4'>
+                        <MeasureTypesSelect value={measure_type} onChange={onSelectChange} error={measure_typeError} />
+                    </div>
+                    <div className='col-12 col-md-4'>
+                        <CategoriesSelect onChange={onSelectChange} value={category} error={categoryError} />
+                    </div>
+                    <div className='col-12 col-md-4'>
+                        <TaxesSelect onChange={onSelectChange} value={tax} error={taxError} />
+                    </div>
                 </div>
                 <div className='col mt-5'>
                     <PrimaryButton type='submit' title={locales.save} className='bg-primary me-2'/>

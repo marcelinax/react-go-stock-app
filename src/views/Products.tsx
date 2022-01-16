@@ -72,10 +72,10 @@ export const Products: React.FC = () => {
                 <div className='col-12 mb-2'>
                     <h3 className='mb-5'>{locales.products_list}</h3>
                     <div className='row'>
-                        <div className='col-4'>
+                        <div className='col-12 col-md-4'>
                             <Search onChange={onInputChange} value={search} placeholder={locales.search} />
                         </div>
-                        <div className='col-8'>
+                        <div className='col-12 col-md-8 mt-md-0 mt-2'>
                             <TablePagination page={page} count={productsAmount} rowsPerPage={size} onPageChange={onPageChange} onRowsPerPageChange={onRowsPerPageChange}/>
                         </div>
                     </div>

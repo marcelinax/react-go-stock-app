@@ -30,6 +30,9 @@ export const TablePagination: React.FC<Props> = ({
                     borderRadius: '3px',
                     color: '#aaaaaf'
                 },
+                '& .MuiTablePagination-toolbar': {
+                    padding: '0'
+                },
                 '& .MuiTablePagination-selectLabel': {
                     color: '#aaaaaf',
                     marginBottom: '0'

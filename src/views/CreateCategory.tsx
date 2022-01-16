@@ -36,13 +36,13 @@ export const CreateCategory: React.FC = () => {
             });
             setErrors([]);
             navigate('/categories');
+            toast.success(locales.category_added_successfully);
         }
     };
 
     const onFormSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
         e.preventDefault();
         createCategory();
-        toast.success(locales.category_added_successfully);
     };
 
     return (

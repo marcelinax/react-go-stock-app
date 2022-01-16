@@ -38,8 +38,8 @@ export const EditCategory: React.FC = () => {
             });
             setErrors([]);
             navigate('/categories');
+            toast.success(locales.category_edited_successfully);
         }
-       
     };
 
     const checkValidation = (): boolean => {
@@ -61,7 +61,6 @@ export const EditCategory: React.FC = () => {
     const onFormSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
         e.preventDefault();
         editCategory();
-        toast.success(locales.category_edited_successfully);
     };
 
     return (

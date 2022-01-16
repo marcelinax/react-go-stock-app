@@ -22,5 +22,9 @@ export const locales = {
     max_on_page: 'Maks na stronie',
     category_name: 'Nazwa kategorii',
     save: 'Zapisz',
-    cancel: 'Anuluj'
+    cancel: 'Anuluj',
+    products: 'Produkty',
+    categories: 'Kategorie',
+    home: 'Home'
+   
 };

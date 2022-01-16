@@ -29,15 +29,17 @@ export const Table: React.FC<Props> = ({ tableHeadings, tableItemsKeys, items })
     };
 
     return (
-        <table className="table border overflow-hidden">
-            <thead>
-                <tr> 
-                    {renderTableHeadings()}
-                </tr>
-            </thead>
-            <tbody>
-                {renderTableItems()}
-            </tbody>
-        </table>
+        <div className="table-responsive">
+            <table className="table border overflow-hidden ">
+                <thead>
+                    <tr> 
+                        {renderTableHeadings()}
+                    </tr>
+                </thead>
+                <tbody>
+                    {renderTableItems()}
+                </tbody>
+            </table>
+        </div>
     );
 };
