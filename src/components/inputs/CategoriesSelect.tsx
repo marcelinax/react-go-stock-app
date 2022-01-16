@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Category } from '../../models/Category';
 import { Select } from './Select';
 import { apiClient } from '../../api/apiClient';
+import { locales } from './../../Locales';
 
 interface Props {
     value: number,
@@ -30,7 +31,7 @@ export const CategoriesSelect: React.FC<Props> = ({ value, onChange, error }) =>
     };
 
     return categories && (
-        <Select id='category_id' title='Kategoria' value={value} onChange={onChange} error={error}>
+        <Select id='category_id' title={locales.category} value={value} onChange={onChange} error={error}>
             <option value="0" className='d-none' disabled />
             {renderCategoriesSelectOptions()}
         </Select>

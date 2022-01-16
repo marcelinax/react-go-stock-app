@@ -4,6 +4,7 @@ import { CategoryForm } from './../components/CategoryForm';
 import { DefaultLayout } from './../layouts/DefaultLayout';
 import { MESSAGES } from './../messages/messages';
 import { apiClient } from './../api/apiClient';
+import { locales } from './../Locales';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -41,12 +42,12 @@ export const CreateCategory: React.FC = () => {
     const onFormSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
         e.preventDefault();
         createCategory();
-        toast.success('Kategoria dodana pomyślnie');
+        toast.success(locales.category_added_successfully);
     };
 
     return (
         <DefaultLayout>
-            <CategoryForm heading='Dodaj kategorię' onFormSubmit={onFormSubmit} category={category} onInputChange={onInputChange} error={errors.filter(err => { return MESSAGES.ENTER_CATEGORY_NAME === err; })[0]}/>
+            <CategoryForm heading={locales.add_category} onFormSubmit={onFormSubmit} category={category} onInputChange={onInputChange} error={errors.filter(err => { return MESSAGES.ENTER_CATEGORY_NAME === err; })[0]}/>
         </DefaultLayout>
     );
 };

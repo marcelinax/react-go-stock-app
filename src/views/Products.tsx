@@ -7,6 +7,7 @@ import { Search } from '../components/global/Search';
 import { Table } from '../components/global/table/Table';
 import { TablePagination } from './../components/global/table/TablePagination';
 import { apiClient } from './../api/apiClient';
+import { locales } from './../Locales';
 import { useNavigate } from 'react-router-dom';
 
 export const Products: React.FC = () => {
@@ -19,10 +20,10 @@ export const Products: React.FC = () => {
     const [size, setSize] = useState<number>(10);
     const [page, setPage] = useState<number>(0);
     const tableHeadings = [
-        'Nazwa',
-        'Kategoria',
-        'Jednostka miary',
-        'Podatek',
+        locales.name,
+        locales.category,
+        locales.measure_type,
+        locales.tax,
         ''
     ];
     const tableItemsKeys = [
@@ -30,7 +31,7 @@ export const Products: React.FC = () => {
         (i: Product) => i.category.name,
         (i: Product) => i.measure_type,
         (i: Product) => i.tax.name + ' ' + i.tax.code,
-        (i: Product) => <PrimaryButton title='Edytuj' type='button' className='btn-primary' onClick={()=>{naviagtion(`/edit-product/${i.id}`);}}/>,
+        (i: Product) => <PrimaryButton title={locales.edit} type='button' className='btn-primary' onClick={()=>{naviagtion(`/edit-product/${i.id}`);}}/>,
     ];
 
     useEffect(() => {
@@ -69,10 +70,10 @@ export const Products: React.FC = () => {
         <DefaultLayout>
             <div className='row mt-5'>
                 <div className='col-12 mb-2'>
-                    <h3 className='mb-5'>Lista produktów</h3>
+                    <h3 className='mb-5'>{locales.products_list}</h3>
                     <div className='row'>
                         <div className='col-4'>
-                            <Search onChange={onInputChange} value={search} placeholder='Szukaj...' />
+                            <Search onChange={onInputChange} value={search} placeholder={locales.search} />
                         </div>
                         <div className='col-8'>
                             <TablePagination page={page} count={productsAmount} rowsPerPage={size} onPageChange={onPageChange} onRowsPerPageChange={onRowsPerPageChange}/>

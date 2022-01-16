@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Select } from './Select';
 import { Tax } from './../../models/Tax';
 import { apiClient } from './../../api/apiClient';
+import { locales } from './../../Locales';
 
 interface Props {
     value: number,
@@ -30,7 +31,7 @@ export const TaxesSelect: React.FC<Props> = ({value,onChange, error}) => {
     };
 
     return taxes && (
-        <Select id='tax_id' title='Podatek' value={value} onChange={onChange} error={error}>
+        <Select id='tax_id' title={locales.tax} value={value} onChange={onChange} error={error}>
             <option value="0" className='d-none' disabled />
             {renderTaxesSelectOptions()}
         </Select>

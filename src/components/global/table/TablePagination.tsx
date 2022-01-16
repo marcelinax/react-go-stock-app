@@ -1,5 +1,6 @@
 import Pagination from '@mui/material/TablePagination';
 import React from 'react';
+import { locales } from './../../../Locales';
 
 interface Props {
     page: number;
@@ -22,7 +23,7 @@ export const TablePagination: React.FC<Props> = ({
             rowsPerPage={rowsPerPage}
             onRowsPerPageChange={onRowsPerPageChange}
             rowsPerPageOptions={[10, 15, 20, 25]}
-            labelRowsPerPage='Maks na stronie'
+            labelRowsPerPage={locales.max_on_page}
             sx={{
                 '& .MuiTablePagination-select': {
                     border: '1px solid #aaaaaf',

@@ -2,6 +2,7 @@ import { Form } from './global/Form';
 import { Input } from './inputs/Input';
 import { PrimaryButton } from './global/PrimaryButton';
 import React from 'react';
+import { locales } from './../Locales';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
@@ -26,11 +27,11 @@ export const CategoryForm: React.FC<Props> = ({
             <div className='col flex p-5'>
                 <h1 className='fs-2 mb-4'>{heading}</h1>
                 <div className='row'>
-                    <Input id='name' onChange={onInputChange} value={category} title='Nazwa kategorii' error={error}/>
+                    <Input id='name' onChange={onInputChange} value={category} title={locales.category_name} error={error}/>
                 </div>
                 <div className='col mt-5'>
-                    <PrimaryButton title='Zapisz' type='submit' className='bg-primary me-2'/>
-                    <PrimaryButton type='button' title='Anuluj' className='bg-danger' onClick={()=>{navigate('/categories');}}/>
+                    <PrimaryButton title={locales.save} type='submit' className='bg-primary me-2'/>
+                    <PrimaryButton type='button' title={locales.cancel} className='bg-danger' onClick={()=>{navigate('/categories');}}/>
                 </div>
             </div>
         </Form>

@@ -7,6 +7,7 @@ import { Search } from './../components/global/Search';
 import { Table } from '../components/global/table/Table';
 import { TablePagination } from './../components/global/table/TablePagination';
 import { apiClient } from './../api/apiClient';
+import { locales } from './../Locales';
 import { useNavigate } from 'react-router-dom';
 
 export const Categories: React.FC = () => {
@@ -18,15 +19,15 @@ export const Categories: React.FC = () => {
     const [page, setPage] = useState<number>(0);
     const [search, setSearch] = useState<string>('');
     const tableHeadings = [
-        'ID',
-        'Nazwa',
+        locales.id,
+        locales.name,
         ''
     ];
 
     const tableItemsKeys = [
         (i: Category) => i.id,
         (i: Category) => i.name,
-        (i: Category) => <PrimaryButton title='Edytuj' type='button' className='btn-primary' onClick={() => {
+        (i: Category) => <PrimaryButton title={locales.edit} type='button' className='btn-primary' onClick={() => {
             naviagtion(`/edit-category/${i.id}`);
         }}/>
 
@@ -66,10 +67,10 @@ export const Categories: React.FC = () => {
         <DefaultLayout>
             <div className='row mt-5'>
                 <div className='col-12 mb-2'>
-                    <h3 className='mb-5'>Lista kategorii</h3>
+                    <h3 className='mb-5'>{locales.categories_list}</h3>
                     <div className='row'>
                         <div className='col-4'>
-                            <Search onChange={onInputChange} value={search} placeholder='Szukaj...' />
+                            <Search onChange={onInputChange} value={search} placeholder={locales.search} />
                         </div>
                         <div className='col-8'>
                             <TablePagination page={page} count={categoriesAmount} rowsPerPage={size} onPageChange={onPageChange} onRowsPerPageChange={onRowsPerPageChange}/>

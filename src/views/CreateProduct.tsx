@@ -4,6 +4,7 @@ import { DefaultLayout } from './../layouts/DefaultLayout';
 import { MESSAGES } from './../messages/messages';
 import { ProductForm } from './../components/ProductForm';
 import { apiClient } from './../api/apiClient';
+import { locales } from './../Locales';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -74,7 +75,7 @@ export const CreateProduct: React.FC = () => {
     const onFormSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
         e.preventDefault();
         createProduct();
-        toast.success('Produkt dodany pomyślnie');
+        toast.success(locales.product_added_successfully);
     };
 
     const filterErrors = (value: string): string => {
@@ -83,7 +84,7 @@ export const CreateProduct: React.FC = () => {
 
     return (
         <DefaultLayout>
-            <ProductForm heading='Dodaj produkt' category={formDate.category_id} tax={formDate.tax_id} measure_type={formDate.measure_type} name={formDate.name} onFormSubmit={onFormSubmit}
+            <ProductForm heading={locales.add_product} category={formDate.category_id} tax={formDate.tax_id} measure_type={formDate.measure_type} name={formDate.name} onFormSubmit={onFormSubmit}
                 categoryError={filterErrors(MESSAGES.CHOOSE_CATEGORY)} measure_typeError={filterErrors(MESSAGES.CHOOSE_MEASURE_TYPE)} nameError={filterErrors(MESSAGES.ENTER_PRODUCT_NAME)}
                 taxError={filterErrors(MESSAGES.CHOOSE_TAX)} onInputChange={onInputChange} onSelectChange={onSelectChange} 
             />
